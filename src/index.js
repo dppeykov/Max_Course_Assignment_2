@@ -4,8 +4,6 @@ import ReactDOM from "react-dom";
 import Validation from "./components/Validation/Validation";
 import Char from "./components/Char/Char";
 
-import "./styles.css";
-
 class App extends Component {
   state = {
     inputLength: 0,
