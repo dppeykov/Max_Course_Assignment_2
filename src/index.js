@@ -1,11 +1,31 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 
+import Validation from "./components/Validation/Validation";
+import Char from "./components/Char/Char";
+
 import "./styles.css";
 
 class App extends Component {
+  state = {
+    inputLength: 0,
+    inputText: []
+  };
+
   changeListener = e => {
-    console.log(e.target.value.length);
+    let enteredText = e.target.value;
+
+    enteredText = enteredText.split("");
+
+    this.setState({
+      inputLength: e.target.value.length,
+      inputText: enteredText
+    });
+  };
+
+  deleteChar = (e, i) => {
+    this.state.inputText.splice(i, 1);
+    this.setState({ inputText: this.state.inputText });
   };
 
   render() {
@@ -47,6 +67,17 @@ class App extends Component {
         <br />
 
         <input type="text " onChange={this.changeListener} />
+        <p>Caracters count: {this.state.inputLength}</p>
+
+        <Validation textLength={this.state.inputLength} />
+
+        {this.state.inputText.map((char, i) => (
+          <Char
+            key={i}
+            character={char}
+            deleteChar={e => this.deleteChar(e, i)}
+          />
+        ))}
       </div>
     );
   }
