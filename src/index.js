@@ -6,19 +6,13 @@ import Char from "./components/Char/Char";
 
 class App extends Component {
   state = {
-    inputLength: 0,
     inputText: []
   };
 
   changeListener = e => {
     let enteredText = e.target.value;
-
     enteredText = enteredText.split("");
-
-    this.setState({
-      inputLength: e.target.value.length,
-      inputText: enteredText
-    });
+    this.setState({ inputText: enteredText });
   };
 
   deleteChar = (e, i) => {
@@ -65,9 +59,9 @@ class App extends Component {
         <br />
 
         <input type="text " onChange={this.changeListener} />
-        <p>Caracters count: {this.state.inputLength}</p>
+        <p>Caracters count: {this.state.inputText.length}</p>
 
-        <Validation textLength={this.state.inputLength} />
+        <Validation textLength={this.state.inputText.length} />
 
         {this.state.inputText.map((char, i) => (
           <Char
